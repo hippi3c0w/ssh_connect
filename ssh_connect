@@ -1,0 +1,29 @@
+#!/bin/bash
+function usage()
+{
+echo "== ssh_connect usage =="
+echo " " 
+echo "-u		specifies the user to make the connection via ssh"
+echo "-s		specifies the server to connect"
+echo "" 
+echo "======"
+}
+
+function server()
+{
+search=`cat hosts | cut -d "=" -f2 | grep "$4" | wc -l`
+	if [[ $search -ge 1 ]];then
+		server=`cat hosts | grep corinne | cut -d " " -f1`
+		ssh malen@$server
+	fi
+}
+if [[ $# -eq 0 ]];then
+usage
+
+else
+	if [[ $1=="-u" ]];then
+		if [[ $3=="-s" ]];then
+server
+	fi	fi
+fi
+
